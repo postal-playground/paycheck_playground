@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pay Calculator</title>
+        <link href="styles.css" rel="stylesheet">
+        <script src="tools.js" defer></script>
+        <script src="table_helpers.js" defer></script>
+        <script src="calculations.js" defer></script>
+        <script type="module" src="income.js" defer></script>
+
+    </head>
+    <body>
+        <div class="nav-bar">
+            <button class="nav-tab" onclick="open_page('gross')">Gross Income</button>
+            <button class="nav-tab" onclick="open_page('about')">About</button>
+        </div>
+        <div class="flex-container">
+            <h1> PayCheck Simulator </h1>
+        </div>
+        <div class="flex-container tab" id="gross">
+            <form>
+                <table class="centered-table">
+                    <thead>
+                        <th>Job Title</th>
+                        <th>Pay Tier</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select id="inputRole">
+                                    <option value="PTF">PTF</option>
+                                    <option value="Regular">Regular</option>
+                                    <option value="T6">Technician</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="inputTier">
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                    <option value="I">I</option>
+                                    <option value="J">J</option>
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                    <option value="M">M</option>
+                                    <option value="N">N</option>
+                                    <option value="O">O</option>
+                                    <option value="P">P</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table class="centered-table" id="hours-inputs">
+                    <thead>
+                        <th></th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                    </thead>
+                    <tbody>
+                        <!-- Table make by script-->
+                    </tbody>
+                </table>
+                <div style="text-align: center;">
+                    <br>
+                    <input type="submit" gross value="Calculate">
+                    <br>
+                    <br>
+                </div>
+            </form>
+            <div class="flex-container hidden" id="grossTable">
+                <table>
+                    <thead>
+                        <th></th>
+                        <th colspan="2">Hours</th>
+                        <th colspan="2">Pay</th>
+                    </thead>
+                    <thead>
+                        <th>Pay Type</th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                    </thead>
+                    <tbody id="time-pay-display">
+                        <!-- Table made by script-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="flex-container tab hidden" id="net">
+            <h3> Tax Situation Estimates </h3>
+            <form>
+                <table class="centered-table">
+                    <thead>
+                        <th>Filing Status</th>
+                        <th>State</th>
+                        <th>Tax Credits</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <select id="inputFilingStatus">
+                                    <option value="MFJ">Married Filing
+                                        Joinly</option>
+                                    <option value="Single">Single</option>
+                                    <option value="MFS">Married Filing
+                                        Separately</option>
+                                    <option value="HoH">Head of
+                                        Household</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select id="inputState">
+                                    <option value="CA">CA</option>
+                                    <option value="CO">CO</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                    <option value="I">I</option>
+                                    <option value="J">J</option>
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                    <option value="M">M</option>
+                                    <option value="N">N</option>
+                                    <option value="O">O</option>
+                                    <option value="P">P</option>
+                                </select>
+                            </td>
+                            <td>
+                                <input type="number" id="inputCredits" min=0
+                                    value=8000>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <table class="centered-table" id="dynamicTable">
+                    <thead>
+                        <th></th>
+                        <th>Week 1</th>
+                        <th>Week 2</th>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+                <div style="text-align: center;">
+                    <br>
+                    <button type="button" id="add-row-button">Add Another
+                        Deduction</button>
+                    <input type="submit" net value="Estimate Net">
+                    <br>
+                    <br>
+                </div>
+            </form>
+        </div>
+        <div class="flex-container hidden" id="netTable">
+        </div>
+        <div class="flex-container tab hidden" id="about">
+            <div>
+                <h3>About</h3>
+                <p>This is a personal project meant to replace my spreadsheets (which I kept accidentally overwriting the equations). As a webpage, the equations are protected.</p>
+                <p>Accruacy is not guaranteed, but it is my goal. As of now, the gross pay is accurate within a few pennies, but you should doublecheck.</p>
+                <p>Feel free to report errors in the GitHub repository.</p>
+                <h3>About Using This Tool</h3>
+                <ul>
+                    <li>Enter your work hours as found in the "virtual time card" on LiteBlue.</li>
+                    <li>This is for carreer-level City Carriers (PTF, T6, Regular).</li>
+                    <li>Pay rates and tiers are from the Sept 6, 2025 NALC Pay Schedule (Table 2)</li>
+                    <li>Watch for negative hours or negative subtotals. This will help you catch typos.</li>
+                </ul>
+
+            </div>
+        </div>
+    </body>
+</html>
