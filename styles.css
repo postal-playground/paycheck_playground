@@ -1,0 +1,58 @@
+td:nth-of-type(2) {
+  text-align: right;
+}
+td:nth-of-type(3) {
+  text-align: right;
+}
+td:nth-of-type(4) {
+  text-align: right;
+}
+td:nth-of-type(5) {
+  text-align: right;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: #9bb7d4;
+}
+
+.gross-pay {
+  font-weight: bold;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Horizontally centers items */
+  align-items: center; /* Vertically centers items */
+}
+
+.button {
+  text-align: center;
+}
+
+.form {
+    justify-content: center;
+    align-items: center;
+}
+
+input {
+  width: 7em;
+}
+
+select {
+  text-align: center;
+}
+
+.centered-table {
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+  justify-content: center;
+  /* Or simply use margin: 0 auto; for top/bottom margin 0 and auto left/right */
+}
+
+.hidden {
+  display: none;
+}
