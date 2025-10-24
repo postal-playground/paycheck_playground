@@ -78,6 +78,7 @@ function typical_deductions() {
         tsp_trad: ["TSP Regular", 5, true, true, window.total_strait_pay],
         health_ins: ["Health Plan (pretax)", 207.66, true, false],
         union_dues: ["Union Dues", 30.97, false, false],
+        life_ins: ["Life Insurance", 7.6, false, false],
     }
 }
 
@@ -144,7 +145,7 @@ function subtotal_deductions(deduction_objects, pretax = true) {
 function subtotal_taxes(deduction_objects) {
     let subtotal = 0;
     for (let deduction in deduction_objects) {
-        if (deduction in Object.keys(taxes())) {
+        if (taxes().hasOwnProperty(deduction)) {
             subtotal = subtotal + deduction_objects[deduction].dollar_amount();
         }
     }
@@ -186,7 +187,6 @@ if (submit_deductions_selection_button) {
 }
 
 window.taxable_income = 0;
-let net_to_bank = 0;
 if (calculate_net_to_bank_button) {
     calculate_net_to_bank_button.addEventListener('click', event => {
         event.preventDefault();
@@ -196,17 +196,14 @@ if (calculate_net_to_bank_button) {
         let pretax_deductions = subtotal_deductions(deduction_objects, true);
         let post_tax_deductions = subtotal_deductions(deduction_objects, false);
         taxable_income = Math.round((window.gross_income - pretax_deductions)*100)/100;
-            
-        const submit_w4_button =  document.getElementById('submit-w4-button');
-        submit_w4_button.click(); //to update tax worksheet with taxable_income
 
         populate_deduction_objects(Object.keys(taxes()), taxes());
         let final_table = make_deductions_input_table(deduction_objects);
         final_table.build_table();
-        let net_to_bank = taxable_income - post_tax_deductions - subtotal_taxes();
+        let net_to_bank = taxable_income - post_tax_deductions - subtotal_taxes(deduction_objects);
         let net_to_bank_row = [
             new Text_cell("Net to bank", "gross-pay"), 
-            new Text_cell(net_to_bank, "gross-pay"),
+            new Text_cell(to_dollars(net_to_bank), "gross-pay"),
             new Text_cell("State taxes and life insurance not yet accounted for", "text")
         ];
         final_table.add_row(net_to_bank_row);
