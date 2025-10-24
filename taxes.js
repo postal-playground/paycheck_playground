@@ -1,12 +1,12 @@
-const fed_tax_rates =[0, 0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
+const fed_tax_rates = [0, 0.1, 0.12, 0.22, 0.24, 0.32, 0.35, 0.37];
 const fed_mfj_brackets_standard = [17100, 40950, 114050, 223800, 411700, 518150, 768700, 202154.5]
+const fed_hoh_brackets_standard = [13900, 30900, 78750, 117250, 211200, 264400, 640250, 187031.5]
+const fed_mfs_brackets_standard = [6400, 18325, 54875, 109750, 203700, 256925, 632750, 188769.75]
+const fed_single_brackets_standard = [6400, 18325, 54875, 109750, 203700, 256925, 632750, 188769.75]
 const fed_mfj_brackets_multiple = [15000, 26925, 63475, 118350, 212300, 265525, 390800]
-const fed_hoh_brackets_standard =[13900, 30900, 78750, 117250, 211200, 264400, 640250, 187031.5]
-const fed_mfs_brackets_standard =[6400, 18325, 54875, 109750, 203700, 256925, 632750, 188769.75]
-const fed_single_brackets_standard =[6400, 18325, 54875, 109750, 203700, 256925, 632750, 188769.75]
-const fed_hoh_brackets_multiple =[0, 17000, 64850, 103350, 197300, 250500, 626350]
-const fed_mfs_brackets_multiple =[0, 11925, 48475, 103350, 197300, 250525, 375800]
-const fed_single_brackets_multiple =[0, 11925, 48475, 103350, 197300, 250525, 375800]
+const fed_hoh_brackets_multiple = [11250, 19750, 43675, 62925, 109900, 136500, 324425]
+const fed_mfs_brackets_multiple = [7500, 13463, 31738, 59175, 106150, 132763, 320675]
+const fed_single_brackets_multiple = [7500, 13463, 31738, 59175, 106150, 132763, 320675]
 
 
 
