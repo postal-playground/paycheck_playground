@@ -134,7 +134,8 @@ function update_deduction_values(raw_input_results, my_deduction_objects) {
 function subtotal_deductions(deduction_objects, pretax = true) {
     let subtotal = 0;
     for (let deduction in deduction_objects) {
-        if (deduction_objects[deduction].is_pretax == pretax) {
+        console.log(deduction, taxes().hasOwnProperty(deduction))
+        if (deduction_objects[deduction].is_pretax == pretax && !taxes().hasOwnProperty(deduction)) {
             subtotal = subtotal + deduction_objects[deduction].dollar_amount();
         }
     }
@@ -190,16 +191,24 @@ let net_to_bank = 0;
 if (calculate_net_to_bank_button) {
     calculate_net_to_bank_button.addEventListener('click', event => {
         event.preventDefault();
+
         let deduction_inputs = input_table.parse_inputs();
         update_deduction_values(deduction_inputs, deduction_objects)
         let pretax_deductions = subtotal_deductions(deduction_objects, true);
         let post_tax_deductions = subtotal_deductions(deduction_objects, false);
         taxable_income = Math.round((window.gross_income - pretax_deductions)*100)/100;
-        console.log("Taxable income: ", taxable_income)
+            
+        const submit_w4_button =  document.getElementById('submit-w4-button');
+        submit_w4_button.click(); //to update tax worksheet with taxable_income
+
         populate_deduction_objects(Object.keys(taxes()), taxes());
         let final_table = make_deductions_input_table(deduction_objects);
         final_table.build_table();
         let net_to_bank = taxable_income - post_tax_deductions - subtotal_taxes();
+        console.log("pre-tax subtotal is: ", pretax_deductions)
+        console.log("post-tax deductions are: ", post_tax_deductions)
+        console.log("taxes subtotal is: ", subtotal_taxes())
+        console.log("net to bank is: ", net_to_bank)
         let net_to_bank_row = [
             new Text_cell("Net to bank", "gross-pay"), 
             new Text_cell(net_to_bank, "gross-pay"),
