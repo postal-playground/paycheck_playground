@@ -3,17 +3,20 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pay Calculator</title>
+        <title>Pay Estimator</title>
         <link href="styles.css" rel="stylesheet">
-        <script src="tools.js" defer></script>
         <script src="table_helpers.js" defer></script>
-        <script src="calculations.js" defer></script>
         <script type="module" src="income.js" defer></script>
+        <script src="ui_tools.js" defer></script>
+        <script src="taxes.js" defer></script>
+        <script type="module" src="deductions.js" defer></script>
 
     </head>
     <body>
         <div class="nav-bar">
             <button class="nav-tab" onclick="open_page('gross')">Gross Income</button>
+            <button class="nav-tab" onclick="open_page('w4')">W4 Info</button>
+            <button class="nav-tab" onclick="open_page('deductions')">Deductions</button>
             <button class="nav-tab" onclick="open_page('about')">About</button>
         </div>
         <div class="flex-container">
@@ -65,7 +68,7 @@
                         <th>Week 2</th>
                     </thead>
                     <tbody>
-                        <!-- Table make by script-->
+                        <!-- Table made by script-->
                     </tbody>
                 </table>
                 <div style="text-align: center;">
@@ -90,80 +93,38 @@
                         <th>Week 2</th>
                     </thead>
                     <tbody id="time-pay-display">
-                        <!-- Table made by script-->
+                        <!-- Table made by income.js-->
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="flex-container tab hidden" id="net">
-            <h3> Tax Situation Estimates </h3>
-            <form>
-                <table class="centered-table">
-                    <thead>
-                        <th>Filing Status</th>
-                        <th>State</th>
-                        <th>Tax Credits</th>
-                    </thead>
+        <div class="flex-container tab hidden" id="w4">
+            <form> 
+                <table class="centered-table" id="w4-input-table">
                     <tbody>
-                        <tr>
-                            <td>
-                                <select id="inputFilingStatus">
-                                    <option value="MFJ">Married Filing
-                                        Joinly</option>
-                                    <option value="Single">Single</option>
-                                    <option value="MFS">Married Filing
-                                        Separately</option>
-                                    <option value="HoH">Head of
-                                        Household</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select id="inputState">
-                                    <option value="CA">CA</option>
-                                    <option value="CO">CO</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                    <option value="H">H</option>
-                                    <option value="I">I</option>
-                                    <option value="J">J</option>
-                                    <option value="K">K</option>
-                                    <option value="L">L</option>
-                                    <option value="M">M</option>
-                                    <option value="N">N</option>
-                                    <option value="O">O</option>
-                                    <option value="P">P</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" id="inputCredits" min=0
-                                    value=8000>
-                            </td>
-                        </tr>
+                        <!-- W4 Table created in taxes.js-->
                     </tbody>
                 </table>
-                <br>
-                <table class="centered-table" id="dynamicTable">
-                    <thead>
-                        <th></th>
-                        <th>Week 1</th>
-                        <th>Week 2</th>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-                <div style="text-align: center;">
-                    <br>
-                    <button type="button" id="add-row-button">Add Another
-                        Deduction</button>
-                    <input type="submit" net value="Estimate Net">
-                    <br>
-                    <br>
-                </div>
+                <button type="button" id="submit-w4-button">Submit</button>
             </form>
         </div>
-        <div class="flex-container hidden" id="netTable">
+        <div class = "flex-container tab hidden" id="deductions">
+            <form id = 'deductions-form'>
+                <p></p>
+                <button type="button" id="submit-deductions-select-button">Submit</button>
+                <table class="centered-table">
+                    <thead>
+                        <th>Deduction</th>
+                        <th>Amount</th>
+                        <th>Pretax</th>
+                        <th>Percent</th>
+                    </thead>
+                    <tbody id="deductions-input-table">
+                        <!--Created in deductions.js-->
+                    </tbody>
+                </table>
+                <button type="button" id='calculate-net-to-bank-button'>Calculate</button>
+            </form>
         </div>
         <div class="flex-container tab hidden" id="about">
             <div>
@@ -179,7 +140,12 @@
                     <li>Watch for negative hours or negative subtotals. This will help you catch typos.</li>
                     <li>All data stays on your computer. The calculator runs in your browser, not on a remote server. Once loaded, the page even works without an internet connection.</li>
                 </ul>
-
+                <br>
+                <h3>Sources</h3>
+                <ul>
+                    <li>2025 Federal income tax data from <a href="https://taxfoundation.org/data/all/federal/historical-income-tax-rates-brackets/">taxfoundation.org</a></li>
+                    <li>2025 State income tax data from <a href="https://taxfoundation.org/data/all/state/state-income-tax-rates/">taxfoundation.org</a></li>
+                </ul>
             </div>
         </div>
     </body>
